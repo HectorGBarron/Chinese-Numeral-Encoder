@@ -32,7 +32,7 @@ def to_chinese_numeral(n)->str:
         negativeSymbol=None
         
     integer, decimal =split(n)
-    integer=integerToNumeral(int(integer))
+    integer=integerToNumeral(integer)
     returnValue=''
     
     #Transforming the decimals to Numeral
@@ -50,8 +50,10 @@ def to_chinese_numeral(n)->str:
 def integerToNumeral(n)->str:    
    if type(n)==str:
        n=str(n)
-   i=0
+   return [(val, pos )for pos, val in  enumerate(list( num for num  in n)[::-1],start=1)]   
       
+
+#[(elem,x) for x, elem in enumerate (list([x for x in test]), start=1)]
    
  
 def split(n)->list():
@@ -73,5 +75,7 @@ def decimalsToNumeral(n)->str:
 
 print(to_chinese_numeral(-54321))
 
+def testfunct(x):
+    return x+1
 
-
+integerToNumeral('12345')
