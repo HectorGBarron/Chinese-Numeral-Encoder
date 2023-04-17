@@ -59,22 +59,33 @@ def integerToNumeral(n)->str:
    '''     
    if type(n)==str:
        n=int(n)
-   if n==0:
-       return numerals(n)
    
    if n<=10:
-       return numerals(n,1)
+       return numerals(n)
    if n<=19:
        
        return numerals(10,1) + numerals(n-10,1)
    
    n=str(n) 
    numbersBreakDown=[(pos,int(val) )for pos, val in  enumerate(list( num for num  in n)[::-1],start=1)]   
-   listWithoutTrailingZeros= [number for number in numbersBreakDown if not(number[1]==0 and number[0]>0)]
+   trailingZeros=None
+   listWithoutTrailingZeros=numbersBreakDown
+   for number in range(len(numbersBreakDown)):
+       if numbersBreakDown[number][1]==0 and trailingZeros!=None:
+           trailingZeros=0
+       if numbersBreakDown[number][1]==0 and trailingZeros==0:
+           numbersBreakDown.pop(number)
+           trailingZeros=None
+       
+       
+   
+   #listWithoutTrailingZeros= [number for number in numbersBreakDown if not(number[1]==0 and number[0]>0)]
    returnValue=''
    for element in listWithoutTrailingZeros[::-1]:
        returnValue=returnValue+numerals(element[1],element[0])        
    return returnValue
+
+
 
 def split(n)->list():
     n=str(n)
@@ -99,4 +110,4 @@ def decimalsToNumeral(n)->str:
     return dot+returnStr
 
 
-print (to_chinese_numeral(9))
+print (to_chinese_numeral(90009))
